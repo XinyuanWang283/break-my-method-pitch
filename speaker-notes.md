@@ -8,7 +8,7 @@ D: live demo · G: recorded workflow GIF · N: notes
 
 When an AI team changes a prompt, there are many things they could test, but limited time and budget. Break My Method reads what changed and helps them choose which tests to run first.
 
-In our example, we shortened a prompt for an AI that reads support emails and extracts an order ID and an action. Both versions passed all five basic tests. That looks reassuring, but what should we check next?
+We use the same Qwen model with two prompts: V1 is the original full prompt and V2 is the shortened version. These five basic emails ask for two refunds, one cancellation, one replacement and one tracking update. Both versions extract the correct order ID and action for all five. That looks reassuring, but what should we check next?
 
 ## 0:45–1:20 · Product + Nebius
 
