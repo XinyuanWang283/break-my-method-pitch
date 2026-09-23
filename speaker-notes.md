@@ -6,9 +6,9 @@ D: live demo · G: recorded workflow GIF · N: notes
 
 ## 0:00–0:45 · Problem
 
-We shortened the instructions for an AI that reads support emails and returns an order ID and an action: refund, replace, cancel or track. Both versions still got all five basic emails right. The shorter prompt looks ready to ship. But these tests only tell us how it handles those five emails.
+When an AI team changes a prompt, there are many things they could test, but limited time and budget. Break My Method reads what changed and helps them choose which tests to run first.
 
-Break My Method helps the team choose what else to check before releasing the update. Its first users are AI product and ML engineers who make this decision whenever they change a prompt.
+In our example, we shortened a prompt for an AI that reads support emails and extracts an order ID and an action. Both versions passed all five basic tests. That looks reassuring, but what should we check next?
 
 ## 0:45–1:20 · Product + Nebius
 
