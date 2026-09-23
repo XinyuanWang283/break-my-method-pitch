@@ -84,35 +84,35 @@ p{line-height:1.45}
 <section class="slide" id="s1" aria-label="Slide 1: Problem">
  <div class="kicker">Break My Method</div>
  <h1>Find what got worse<br>before you ship what got better.</h1>
- <p class="cap problem-copy">AI teams ship prompt and model updates constantly.<br>Standard evals can stay green while important user cases regress.</p>
+ <p class="cap problem-copy">We shortened the instructions for an AI that reads support emails.<br>Both versions still passed all five basic tests.</p>
  <div class="standard" aria-label="Standard evaluation accuracy">
   <div><div class="label">Production V1</div><div class="number">100%</div></div>
   <div><div class="label">Candidate V2</div><div class="number">100%</div></div>
  </div>
  <p class="safe">Looks safe to ship.</p>
  <div class="foot">For AI product &amp; ML engineering teams.</div>
- <aside class="notes"><h2>0:00–0:45 · Problem</h2><p>AI teams ship prompt and model updates constantly. The standard evaluation can stay green while particular user cases get worse. Here is a support-email extractor: it returns an order ID and the requested action. We shortened its production prompt. Both versions still score one hundred percent on our clean examples. The candidate looks safe to ship. But equal clean accuracy does not tell us whether a removed instruction mattered.</p><p>Our customer is the AI product or ML engineering team making that release decision. Break My Method asks: what should we test before we ship?</p></aside>
+ <aside class="notes"><h2>0:00–0:45 · Problem</h2><p>We shortened the instructions for an AI that reads support emails and returns an order ID and an action: refund, replace, cancel or track. Both versions still got all five basic emails right. The shorter prompt looks ready to ship. But these tests only tell us how it handles those five emails.</p><p>Break My Method helps the team choose what else to check before releasing the update. Its first users are AI product and ML engineers who make this decision whenever they change a prompt.</p></aside>
 </section>
 <section class="slide" id="s2" aria-label="Slide 2: Product and Nebius">
- <h2>Break My Method actively decides<br>what to test next.</h2>
+ <h2>The model picks a test.<br>The app checks the result.</h2>
  <div class="product-layout">
   <ol class="flow" aria-label="Live planning and evidence loop">
-   <li>V1 → V2 change</li>
+   <li>Old + new prompts</li>
    <li><span class="model">GPT-OSS-120B</span><span class="provider">Nebius Token Factory</span></li>
-   <li>Choose next stress test</li>
-   <li>Real evidence<small>Previously executed and frozen</small></li>
-   <li>Next decision<small>Only revealed results go back to the planner</small></li>
+   <li>JSON: test name + reason</li>
+   <li>App loads saved test results</li>
+   <li>Scores back → next choice</li>
   </ol>
-  <div><p class="principle">The model chooses<br><em>where to look.</em><br>It never invents<br>the evidence.</p><p class="disclosure">Planning is live.<br>Evidence is executed, saved,<br>and scored against ground truth.</p></div>
+  <div><p class="principle"><em>GPT-OSS-120B</em><br>chooses the test.<br><em>Qwen3-30B</em><br>supplied the answers.</p><p class="disclosure">Planning runs live.<br>Qwen outputs were saved earlier.</p></div>
  </div>
- <aside class="notes"><h2>0:45–1:20 · Product + Nebius</h2><p>GPT-OSS-120B on Nebius Token Factory is the live experiment planner. It compares the prompts, sees the remaining test families and budget, and chooses the next test. Then we reveal real, previously executed evidence from the frozen clean audit. Only those revealed scores return to the planner. It never sees scores for unselected families.</p><p>The model chooses where to look. It never invents the evidence. The loop stops at a twenty percentage-point regression or after three families. The task-model evidence came from Qwen/Qwen3-30B-A3B-Instruct-2507; GPT-OSS-120B makes the planning decisions.</p></aside>
+ <aside class="notes"><h2>0:45–1:20 · Product + Nebius</h2><p>We use two open models on Nebius Token Factory. GPT-OSS-120B reads the prompt change and returns JSON with a test name and a reason. The app checks that name, loads the matching results and sends the scores back for the next choice. It stops at a twenty-point accuracy drop or after three tests.</p><p>Qwen3-30B produced the email answers in earlier test runs. Those answers are saved; GPT-OSS makes each planning decision live.</p><p>If asked: the full task-model name is Qwen/Qwen3-30B-A3B-Instruct-2507. Only scores from selected tests reach the planner.</p></aside>
 </section>
 <section class="slide" id="s3" aria-label="Slide 3: Live demo">
  <h1><a href="https://safe-ship-sidekick.lovable.app/" target="_blank" rel="noopener" aria-label="Can we break it? Open the live demo in a new tab">Can we break it?</a></h1>
- <aside class="notes"><h2>1:20–2:40 · Live demo</h2><p>Click the title or press D to open the live site in a new tab. Show that clean accuracy is one hundred percent for both versions. Click BREAK MY METHOD once. Read the actual live hypothesis and sequence, then open the evidence. If regression is found, point to V1 forty percent, V2 zero percent, and the forty-point drop. State the actual live test count; do not promise one or two tests.</p><p>Return to this deck and advance to Evidence by 2:40. Keep the demo within sixty to ninety seconds. If the service is unavailable or the budget expires, say so and move directly to the separately audited result. Do not present the audit as a live outcome.</p></aside>
+ <aside class="notes"><h2>1:20–2:40 · Live demo</h2><p>Click the title or press D to open the live site. Show the two one-hundred-percent scores, then click BREAK MY METHOD once. Follow the actual test selection. When a failure appears, show the email and compare the expected answer with the two outputs. In the saved cancellation example, the new prompt labels the request as a refund for a different order.</p><p>State the actual live test count, then return to the deck by 2:40. If the live service stalls, press G to open the 28-second recorded workflow GIF and say: “Here is a recorded run showing the model reply and what the app does with it.” Use the GIF as an explanation or fallback; avoid playing both demonstrations in full.</p><p>If the live run reaches its budget without a regression, report that outcome and move to the separately audited benchmark. The recording and benchmark are separate from the live result.</p></aside>
 </section>
 <section class="slide" id="s4" aria-label="Slide 4: Audited evidence">
- <div class="kicker">Audited evidence</div>
+ <div class="kicker">Tests needed to find the problem</div>
  <div class="evidence-grid">
   <div>
    <div class="hero-stat"><b id="run-lengths" style="font-weight:500">2, 2, 1</b> <span>tests</span></div>
@@ -121,24 +121,24 @@ p{line-height:1.45}
    <div class="within"><h3>Within 2 tests</h3><div class="within-row"><div>Nebius: <strong id="within-nebius">3/3</strong></div><div>Random: <strong id="within-random">33.3%</strong></div></div></div>
   </div>
   <div class="hidden">
-   <h3>Hidden regression</h3><p class="mode">Instruction-like customer content</p>
+   <h3>Hidden regression</h3><p class="mode">Instructions hidden in the email</p>
    <table class="result-table" aria-label="Prompt injection accuracy"><tbody><tr><th scope="row">V1</th><td id="v1-score">40%</td></tr><tr class="candidate"><th scope="row">V2</th><td id="v2-score">0%</td></tr></tbody></table>
    <p class="delta">Δ <span id="delta">−40</span> pp</p>
   </div>
  </div>
  <p class="audit-note">Small synthetic demonstration; n=3 planner runs.</p>
- <aside class="notes"><h2>2:40–3:40 · Evidence</h2><p>Separate from the live run, we froze both prompts, all examples, the scoring rule and the planner prompt. In three fresh-context runs, Nebius found the hidden regression after two, two and one test families. With one regression family among six, uniform random search without replacement takes three point five tests in expectation. Within two tests, Nebius succeeded in all three audited runs; random search has an exact thirty-three point three percent chance.</p><p>The hidden condition is instruction-like customer content: V1 scores forty percent and V2 zero. V1 is not secure; it still fails three of the five examples. This is a small synthetic demonstration, not statistical significance or evidence of general superiority. Random expectation covers the full six-family search; planner runs have a budget of three.</p><p>Source: clean audit 20260923T105229532804Z/benchmark.json. The benchmark remains separate from live outcomes.</p></aside>
+ <aside class="notes"><h2>2:40–3:40 · Evidence</h2><p>We measured tests needed to find the problem. In three separate runs, the planner found it after two, two and one tests. Random selection without repetition takes three point five tests on average when one of six test types contains the regression. Within two tests, the planner found it in all three runs; random search has a thirty-three point three percent chance.</p><p>The failure is instructions hidden in customer emails. V1 gets forty percent right and V2 gets none, a forty-point drop. These are five synthetic emails and three planner runs.</p><p>If asked: the random expectation covers all six test types; the planner has a budget of three. Prompts, examples and scoring were fixed. V1 still misses three of the five injection emails. This small demonstration does not establish general superiority or statistical significance. Source: clean audit 20260923T105229532804Z/benchmark.json.</p></aside>
 </section>
 <section class="slide" id="s5" aria-label="Slide 5: Company">
- <h2>From static eval suites<br>to active AI testing</h2>
+ <h2>Choose what to test<br>before the next release</h2>
  <dl class="company">
-  <dt>Customer</dt><dd>AI teams shipping prompt/model updates</dd>
-  <dt>Pain</dt><dd>Manual regression-test selection consumes<br>engineering time and inference budget</dd>
-  <dt>Product</dt><dd>Active testing layer on top of existing eval workflows</dd>
-  <dt>Business</dt><dd>Team subscription + evaluation usage<br>+ enterprise private deployment</dd>
+  <dt>Customer</dt><dd>AI teams shipping prompt and model updates</dd>
+  <dt>Pain</dt><dd>Choosing edge cases takes time.<br>Running every test uses inference budget.</dd>
+  <dt>Product</dt><dd>Test selection inside the team’s release workflow</dd>
+  <dt>Business</dt><dd>Team subscriptions + evaluation usage<br>Private deployment for enterprise customers</dd>
  </dl>
  <div class="roadmap"><p><strong>Today:</strong> prompt regression testing.</p><p><strong>Next:</strong> models, RAG systems and AI agents.</p></div>
- <aside class="notes"><h2>3:40–4:30 · Company / 4:30–5:00 · Close + buffer</h2><p>Our target customer is the team shipping prompt and model updates. Today, engineers choose regression tests manually, spending engineering time and inference budget. We want to add active test selection on top of their existing evaluation workflows. The proposed business model is a team subscription plus evaluation usage, with private deployment for enterprise teams. That is the commercial direction, not a claim of existing revenue.</p><p>Today the working product tests a prompt regression. Models, RAG systems and agents are next. Open weights make it possible for teams to pin and privately deploy a planner, and eventually adapt it to their own regression history. These are future directions, not capabilities we have demonstrated today.</p><p><strong>Standard evals tell you what got better. Break My Method finds what got worse before your users do.</strong></p><p>Leave the remaining time for the close, a slow demo or questions. Do not add a sixth slide.</p></aside>
+ <aside class="notes"><h2>3:40–4:30 · Company / 4:30–5:00 · Close + buffer</h2><p>AI teams face this decision every time they update a prompt or model. Engineers choose edge cases by hand or spend more budget running larger test suites. We want to put test selection inside the release workflow they already use.</p><p>We would charge a team subscription and evaluation usage, with private deployment for enterprise customers. The reason to pay is less time choosing tests and less inference spent on uninformative checks. Today we test prompt updates. Models, RAG systems and agents are next.</p><p>Standard evals tell you what got better. Break My Method finds what got worse before your users do.</p></aside>
 </section>
 <div class="hud" id="counter" aria-live="polite">1 / 5</div>
 </main>
@@ -180,7 +180,7 @@ p{line-height:1.45}
  document.getElementById('delta').textContent='−'+data.regression.delta_pp;
  let cur=0;
  function scale(){stage.style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/1280,innerHeight/720)})`;}
- function updateNotes(){notes.innerHTML=slides[cur].querySelector('.notes').innerHTML+'<p class="hint">N / Escape: close notes · ← / →: navigate · D: demo · F: fullscreen · Ctrl/Cmd+P: PDF</p>';}
+ function updateNotes(){notes.innerHTML=slides[cur].querySelector('.notes').innerHTML+'<p class="hint">N / Escape: close notes · ← / →: navigate · D: demo · G: recorded GIF · F: fullscreen · Ctrl/Cmd+P: PDF</p>';}
  function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>{s.classList.toggle('active',j===cur);s.setAttribute('aria-hidden',String(j!==cur));});counter.textContent=(cur+1)+' / '+slides.length;const hash='#s'+(cur+1);if(location.hash!==hash)history.replaceState(null,'',hash);updateNotes();}
  function fromHash(){const m=location.hash.match(/^#s([1-5])$/);show(m?Number(m[1])-1:0);}
  function demo(){window.open(data.demo_url,'_blank','noopener');}
@@ -194,6 +194,7 @@ p{line-height:1.45}
   else if(e.key.toLowerCase()==='n'){notes.classList.toggle('open');}
   else if(e.key==='Escape')notes.classList.remove('open');
   else if(e.key.toLowerCase()==='d')demo();
+  else if(e.key.toLowerCase()==='g')window.open('workflow-replay.gif','_blank','noopener');
   else if(e.key.toLowerCase()==='f'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.().catch(()=>{});}
  });
  let tx=null,ty=null;
