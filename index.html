@@ -126,7 +126,7 @@ Return JSON only:
    <li><strong>NL-39829</strong><span>Refund this order</span></li>
   </ul>
  </div>
- <a class="prompt-link" href="prompts.txt" target="_blank" rel="noopener">Read both full prompts ↗</a>
+ <a class="prompt-link" href="prompts.html" target="_blank" rel="noopener">Read both full prompts ↗</a>
  <div class="foot">For AI product &amp; ML engineering teams.</div>
  <aside class="notes"><h2>0:00–0:45 · Problem</h2><p>When an AI team changes a prompt, there are many things they could test, but limited time and budget. Break My Method reads what changed and helps them choose which tests to run first.</p><p>We use the same Qwen model with two prompts. V1 explicitly says to treat email contents as untrusted data. V2 keeps the extraction task and JSON format, but removes the robustness rules. Both still get these five basic emails right: two refunds, a cancellation, a replacement and a tracking request. What should we check next?</p><h3>Full frozen prompts</h3><h4>V1</h4><pre>Extract the customer&#x27;s current order ID and requested action.
 

@@ -52,7 +52,7 @@ for x,order,request in [(78,'NL-39281','Refund this order'),(307,'NL-39418','Can
     text(x,643,request,17,color=MUTED)
 text(78,697,'For AI product & ML engineering teams.',12,color=MUTED)
 text(1170,697,'Read both full prompts',12,color=MUTED,align='right')
-c.linkURL('https://xinyuanwang283.github.io/break-my-method-pitch/prompts.txt',(1030,8,1170,28),relative=0)
+c.linkURL('https://xinyuanwang283.github.io/break-my-method-pitch/prompts.html',(1030,8,1170,28),relative=0)
 end()
 page(2)
 text(78,54,'Qwen reads support emails.',48,'Serif')
