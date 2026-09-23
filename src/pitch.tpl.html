@@ -47,10 +47,6 @@ p{line-height:1.45}
 .metric-label{font-size:24px;color:var(--ink-2);margin-top:10px}
 .random{margin-top:36px;font:42px var(--serif)}
 .random small{display:block;font:22px var(--sans);color:var(--ink-2);margin-top:10px}
-.within{margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
-.within h3{font-size:21px;font-weight:500;color:var(--ink-2)}
-.within-row{display:flex;gap:66px;margin-top:10px;font-size:25px}
-.within-row strong{font-weight:650;font-size:32px}
 .hidden{border-left:1px solid var(--line);padding-left:45px;padding-top:8px}
 .hidden h3{font:28px var(--serif)}
 .hidden .mode{font-size:18px;color:var(--ink-2);margin-top:10px}
@@ -126,7 +122,6 @@ p{line-height:1.45}
    <div class="hero-stat"><b id="run-lengths" style="font-weight:500">2, 2, 1</b> <span>tests</span></div>
    <p class="metric-label">Nebius planner fresh runs</p>
    <div class="random"><span id="random-expectation">3.5</span> tests expected<small>Random search · without replacement</small></div>
-   <div class="within"><h3>Within 2 tests</h3><div class="within-row"><div>Nebius: <strong id="within-nebius">3/3</strong></div><div>Random: <strong id="within-random">33.3%</strong></div></div></div>
   </div>
   <div class="hidden">
    <h3>Hidden regression</h3><p class="mode">Instructions hidden in the email</p>
@@ -135,7 +130,7 @@ p{line-height:1.45}
   </div>
  </div>
  <p class="audit-note">Small synthetic demonstration; n=3 planner runs.</p>
- <aside class="notes"><h2>2:40–3:40 · Evidence</h2><p>We measured tests needed to find the problem. In three separate runs, the planner found it after two, two and one tests. Random selection without repetition takes three point five tests on average when one of six test types contains the regression. Within two tests, the planner found it in all three runs; random search has a thirty-three point three percent chance.</p><p>The failure is instructions hidden in customer emails. V1 gets forty percent right and V2 gets none, a forty-point drop. These are five synthetic emails and three planner runs.</p><p>If asked: the random expectation covers all six test types; the planner has a budget of three. Prompts, examples and scoring were fixed. V1 still misses three of the five injection emails. This small demonstration does not establish general superiority or statistical significance. Source: clean audit 20260923T105229532804Z/benchmark.json.</p></aside>
+ <aside class="notes"><h2>2:40–3:40 · Evidence</h2><p>We measured tests needed to find the problem. In three separate runs, the planner found it after two, two and one tests. Random selection without repetition takes three point five tests on average when one of six test types contains the regression.</p><p>The failure is instructions hidden in customer emails. V1 gets forty percent right and V2 gets none, a forty-point drop. These are five synthetic emails and three planner runs.</p><p>If asked: Within two tests, the planner found it in all three runs; random search has a thirty-three point three percent chance. The random expectation covers all six test types; the planner has a budget of three. Prompts, examples and scoring were fixed. V1 still misses three of the five injection emails. This small demonstration does not establish general superiority or statistical significance. Source: clean audit 20260923T105229532804Z/benchmark.json.</p></aside>
 </section>
 <section class="slide" id="s5" aria-label="Slide 5: Company">
  <h2>Choose what to test<br>before the next release</h2>
@@ -159,8 +154,6 @@ p{line-height:1.45}
  const data=JSON.parse(document.getElementById('audit-data').textContent);
  document.getElementById('run-lengths').textContent=data.run_lengths.join(', ');
  document.getElementById('random-expectation').textContent=data.random_expectation;
- document.getElementById('within-nebius').textContent=data.within_two_nebius;
- document.getElementById('within-random').textContent=data.within_two_random;
  document.getElementById('v1-score').textContent=Math.round(data.regression.v1_accuracy*100)+'%';
  document.getElementById('v2-score').textContent=Math.round(data.regression.v2_accuracy*100)+'%';
  document.getElementById('delta').textContent='−'+data.regression.delta_pp;

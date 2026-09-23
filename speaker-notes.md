@@ -30,11 +30,11 @@ If the live run reaches its budget without a regression, report that outcome and
 
 ## 2:40–3:40 · Evidence
 
-We measured tests needed to find the problem. In three separate runs, the planner found it after two, two and one tests. Random selection without repetition takes three point five tests on average when one of six test types contains the regression. Within two tests, the planner found it in all three runs; random search has a thirty-three point three percent chance.
+We measured tests needed to find the problem. In three separate runs, the planner found it after two, two and one tests. Random selection without repetition takes three point five tests on average when one of six test types contains the regression.
 
 The failure is instructions hidden in customer emails. V1 gets forty percent right and V2 gets none, a forty-point drop. These are five synthetic emails and three planner runs.
 
-If asked: the random expectation covers all six test types; the planner has a budget of three. Prompts, examples and scoring were fixed. V1 still misses three of the five injection emails. This small demonstration does not establish general superiority or statistical significance. Source: clean audit 20260923T105229532804Z/benchmark.json.
+If asked: Within two tests, the planner found it in all three runs; random search has a thirty-three point three percent chance. The random expectation covers all six test types; the planner has a budget of three. Prompts, examples and scoring were fixed. V1 still misses three of the five injection emails. This small demonstration does not establish general superiority or statistical significance. Source: clean audit 20260923T105229532804Z/benchmark.json.
 
 ## 3:40–4:30 · Company / 4:30–5:00 · Close + buffer
 
