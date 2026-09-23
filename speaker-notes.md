@@ -12,11 +12,13 @@ Break My Method helps the team choose what else to check before releasing the up
 
 ## 0:45–1:20 · Product + Nebius
 
-We use two open models on Nebius Token Factory. GPT-OSS-120B reads the prompt change and returns JSON with a test name and a reason. The app checks that name, loads the matching results and sends the scores back for the next choice. It stops at a twenty-point accuracy drop or after three tests.
+Qwen is the model we are testing. It reads a support email and extracts an order ID and an action, using either the old prompt or the new one. We ran those email tests earlier and saved the answers and scores.
 
-Qwen3-30B produced the email answers in earlier test runs. Those answers are saved; GPT-OSS makes each planning decision live.
+GPT-OSS is the tester. It reads the prompt changes and picks a type of email to check, with a reason. The app loads that test’s saved V1 and V2 scores and sends them back. GPT-OSS then chooses another test, unless we have found a twenty-point drop or used all three tests.
 
-If asked: the full task-model name is Qwen/Qwen3-30B-A3B-Instruct-2507. Only scores from selected tests reach the planner.
+Both models run on Nebius Token Factory. In this demo, GPT-OSS makes its decisions live; the Qwen test results were saved beforehand.
+
+If asked: the full task-model name is Qwen/Qwen3-30B-A3B-Instruct-2507. The planner returns a test name and reason as JSON. It only sees scores after choosing a test. The email shown on this slide is an illustration of the extraction task, not an audited test case.
 
 ## 1:20–2:40 · Live demo
 

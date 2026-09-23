@@ -27,16 +27,16 @@ p{line-height:1.45}
 .standard .label{font-size:22px;color:var(--ink-2);padding-bottom:12px;border-bottom:1px solid var(--line)}
 .standard .number{font:74px var(--serif);margin-top:8px}
 .safe{font:italic 30px var(--serif);color:var(--aware);text-align:center;margin-top:21px}
-.product-layout{display:grid;grid-template-columns:590px 1fr;gap:65px;align-items:center;flex:1;margin-top:24px}
-.flow{text-align:center;list-style:none}
-.flow li{font-size:25px;line-height:1.18}
-.flow li+li::before{content:"↓";display:block;color:var(--ink-3);font-size:25px;line-height:1;margin:7px 0}
-.flow .model{font:35px var(--serif);color:var(--aware)}
-.flow .provider{display:block;font-size:21px;margin-top:5px;color:var(--ink)}
-.flow small{display:block;font-size:18px;color:var(--ink-2);margin-top:5px}
-.principle{font:34px/1.28 var(--serif)}
-.principle em{font-style:normal;color:var(--aware)}
-.disclosure{font-size:19px;color:var(--ink-2);margin-top:26px;line-height:1.5}
+.product-layout{display:grid;grid-template-columns:500px 1fr;gap:65px;margin-top:40px}
+.model-heading{font:32px var(--serif);color:var(--aware);margin-bottom:12px}
+.model-context{font-size:23px;line-height:1.4;color:var(--ink-2)}
+.email-example{margin-top:30px;font-size:25px;line-height:1.6}
+.email-example .example-label{display:block;font-size:17px;color:var(--ink-2)}
+.email-example .arrow{display:block;color:var(--ink-3);margin:8px 0}
+.saved-note{font-size:19px;color:var(--ink-2);margin-top:25px;line-height:1.5}
+.planning-steps{list-style:none;margin-top:22px;font-size:23px;line-height:1.4}
+.planning-steps li+li{margin-top:18px}
+.planning-steps strong{font-weight:600}
 #s3{justify-content:center;align-items:center}
 #s3 h1{font-size:100px}
 #s3 a{color:var(--ink);text-decoration:none}
@@ -94,18 +94,26 @@ p{line-height:1.45}
  <aside class="notes"><h2>0:00–0:45 · Problem</h2><p>We shortened the instructions for an AI that reads support emails and returns an order ID and an action: refund, replace, cancel or track. Both versions still got all five basic emails right. The shorter prompt looks ready to ship. But these tests only tell us how it handles those five emails.</p><p>Break My Method helps the team choose what else to check before releasing the update. Its first users are AI product and ML engineers who make this decision whenever they change a prompt.</p></aside>
 </section>
 <section class="slide" id="s2" aria-label="Slide 2: Product and Nebius">
- <h2>The model picks a test.<br>The app checks the result.</h2>
+ <h2>Qwen reads support emails.<br>GPT-OSS chooses the tests.</h2>
  <div class="product-layout">
-  <ol class="flow" aria-label="Live planning and evidence loop">
-   <li>Old + new prompts</li>
-   <li><span class="model">GPT-OSS-120B</span><span class="provider">Nebius Token Factory</span></li>
-   <li>JSON: test name + reason</li>
-   <li>App loads saved test results</li>
-   <li>Scores back → next choice</li>
-  </ol>
-  <div><p class="principle"><em>GPT-OSS-120B</em><br>chooses the test.<br><em>Qwen3-30B</em><br>supplied the answers.</p><p class="disclosure">Planning runs live.<br>Qwen outputs were saved earlier.</p></div>
+  <div>
+   <h3 class="model-heading">Qwen3-30B · tested earlier</h3>
+   <p class="model-context">Reads each email using V1 and V2.</p>
+   <p class="email-example"><span class="example-label">Example extraction</span>“Please refund order #1234.”<span class="arrow">↓</span>Order: 1234 · Action: refund</p>
+   <p class="saved-note">Answers and scores saved before the demo.</p>
+  </div>
+  <div>
+   <h3 class="model-heading">GPT-OSS-120B · live</h3>
+   <ol class="planning-steps" aria-label="How the live test selection works">
+    <li><strong>1. Read</strong> what changed in V1 → V2.</li>
+    <li><strong>2. Choose</strong> an email test and explain why.</li>
+    <li><strong>3. App loads</strong> that test’s saved<br>V1 and V2 scores.</li>
+    <li><strong>4. See results</strong> → choose again or stop.</li>
+   </ol>
+  </div>
  </div>
- <aside class="notes"><h2>0:45–1:20 · Product + Nebius</h2><p>We use two open models on Nebius Token Factory. GPT-OSS-120B reads the prompt change and returns JSON with a test name and a reason. The app checks that name, loads the matching results and sends the scores back for the next choice. It stops at a twenty-point accuracy drop or after three tests.</p><p>Qwen3-30B produced the email answers in earlier test runs. Those answers are saved; GPT-OSS makes each planning decision live.</p><p>If asked: the full task-model name is Qwen/Qwen3-30B-A3B-Instruct-2507. Only scores from selected tests reach the planner.</p></aside>
+ <div class="foot">Both models served through Nebius Token Factory.</div>
+ <aside class="notes"><h2>0:45–1:20 · Product + Nebius</h2><p>Qwen is the model we are testing. It reads a support email and extracts an order ID and an action, using either the old prompt or the new one. We ran those email tests earlier and saved the answers and scores.</p><p>GPT-OSS is the tester. It reads the prompt changes and picks a type of email to check, with a reason. The app loads that test’s saved V1 and V2 scores and sends them back. GPT-OSS then chooses another test, unless we have found a twenty-point drop or used all three tests.</p><p>Both models run on Nebius Token Factory. In this demo, GPT-OSS makes its decisions live; the Qwen test results were saved beforehand.</p><p>If asked: the full task-model name is Qwen/Qwen3-30B-A3B-Instruct-2507. The planner returns a test name and reason as JSON. It only sees scores after choosing a test. The email shown on this slide is an illustration of the extraction task, not an audited test case.</p></aside>
 </section>
 <section class="slide" id="s3" aria-label="Slide 3: Live demo">
  <h1><a href="https://safe-ship-sidekick.lovable.app/" target="_blank" rel="noopener" aria-label="Can we break it? Open the live demo in a new tab">Can we break it?</a></h1>
