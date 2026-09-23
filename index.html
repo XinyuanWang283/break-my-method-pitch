@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Break My Method: a five-slide hackathon pitch. Live Nebius planning with frozen, executed regression evidence.">
+<title>Break My Method — Pitch</title>
+<style>
+/* Adapted from agdestein/SlidesEccomas2026 (251e233): ice paper,
+   petrol serif, amber emphasis, 1280×720 stage and offline print layout. */
+:root{--bg:#e7edf1;--paper:#f3f7f9;--ink:#14303c;--ink-2:#46626f;--ink-3:#7d95a1;--line:#ccd9e1;--blind:#5b7f93;--aware:#c07f00;--warn:#c02020;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,"DejaVu Sans Mono",monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--bg);overflow:hidden}
+body{font-family:var(--sans);color:var(--ink)}
+#stage{width:1280px;height:720px;position:absolute;left:50%;top:50%;transform-origin:center;background:var(--paper)}
+section.slide{position:absolute;inset:0;padding:54px 78px 64px;display:none;flex-direction:column}
+section.slide.active{display:flex}
+h1,h2{font-family:var(--serif);font-weight:500;line-height:1.12;letter-spacing:-.025em}
+h1{font-size:56px}h2{font-size:48px}
+p{line-height:1.45}
+.kicker{font:650 13px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--aware);margin-bottom:20px}
+.cap{font-size:23px;color:var(--ink-2);line-height:1.5}
+.foot{position:absolute;bottom:24px;left:78px;font:14px var(--sans);color:var(--ink-2)}
+.hud{position:absolute;bottom:24px;right:30px;font:14px var(--mono);color:var(--ink-3)}
+.problem-copy{margin-top:24px;max-width:1060px}
+.standard{display:grid;grid-template-columns:1fr 1fr;gap:90px;width:730px;margin:32px auto 0;text-align:center}
+.standard .label{font-size:22px;color:var(--ink-2);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.standard .number{font:74px var(--serif);margin-top:8px}
+.safe{font:italic 30px var(--serif);color:var(--aware);text-align:center;margin-top:21px}
+.product-layout{display:grid;grid-template-columns:590px 1fr;gap:65px;align-items:center;flex:1;margin-top:24px}
+.flow{text-align:center;list-style:none}
+.flow li{font-size:25px;line-height:1.18}
+.flow li+li::before{content:"↓";display:block;color:var(--ink-3);font-size:25px;line-height:1;margin:7px 0}
+.flow .model{font:35px var(--serif);color:var(--aware)}
+.flow .provider{display:block;font-size:21px;margin-top:5px;color:var(--ink)}
+.flow small{display:block;font-size:18px;color:var(--ink-2);margin-top:5px}
+.principle{font:34px/1.28 var(--serif)}
+.principle em{font-style:normal;color:var(--aware)}
+.disclosure{font-size:19px;color:var(--ink-2);margin-top:26px;line-height:1.5}
+#s3{justify-content:center;align-items:center}
+#s3 h1{font-size:100px}
+#s3 a{color:var(--ink);text-decoration:none}
+#s3 a:hover,#s3 a:focus-visible{color:var(--aware);outline-offset:12px}
+.evidence-grid{display:grid;grid-template-columns:660px 1fr;gap:64px;margin-top:8px}
+.hero-stat{font:86px/1.08 var(--serif);color:var(--aware);white-space:nowrap}
+.hero-stat span{font-size:45px;color:var(--ink)}
+.metric-label{font-size:24px;color:var(--ink-2);margin-top:10px}
+.random{margin-top:36px;font:42px var(--serif)}
+.random small{display:block;font:22px var(--sans);color:var(--ink-2);margin-top:10px}
+.within{margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
+.within h3{font-size:21px;font-weight:500;color:var(--ink-2)}
+.within-row{display:flex;gap:66px;margin-top:10px;font-size:25px}
+.within-row strong{font-weight:650;font-size:32px}
+.hidden{border-left:1px solid var(--line);padding-left:45px;padding-top:8px}
+.hidden h3{font:28px var(--serif)}
+.hidden .mode{font-size:18px;color:var(--ink-2);margin-top:10px}
+.result-table{margin-top:32px;width:100%;border-collapse:collapse}
+.result-table th{font:25px var(--sans);text-align:left;padding:11px 0;font-weight:400;color:var(--ink-2)}
+.result-table td{font:55px var(--serif);text-align:right}
+.result-table .candidate td{color:var(--warn)}
+.delta{font:43px var(--serif);color:var(--warn);margin-top:28px;padding-top:24px;border-top:1px solid var(--line);white-space:nowrap}
+.audit-note{margin-top:auto;font-size:17px;color:var(--ink-2)}
+.company{display:grid;grid-template-columns:145px 1fr;gap:20px 25px;margin-top:32px;align-items:baseline}
+.company dt{font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--aware);font-weight:650}
+.company dd{font-size:25px;line-height:1.35}
+.roadmap{margin-top:auto;border-top:1px solid var(--line);padding-top:24px;font:30px/1.5 var(--serif)}
+.roadmap strong{font-weight:500;color:var(--aware)}
+.notes{display:none}
+#notes-panel{display:none;position:fixed;inset:7vh 8vw;overflow:auto;background:var(--paper);border:1px solid var(--line);box-shadow:0 20px 80px #14303c33;padding:40px;color:var(--ink);z-index:10;font:22px/1.6 var(--sans)}
+#notes-panel.open{display:block}#notes-panel h2{font-size:34px;margin-bottom:18px}#notes-panel p+p{margin-top:18px}
+#notes-panel .hint{font:15px var(--mono);color:var(--ink-2);margin-top:24px}
+@media print{
+ html,body{height:auto;overflow:visible;background:var(--paper);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #stage{position:static;transform:none!important;height:auto;width:1280px}
+ section.slide{display:flex!important;position:relative;width:1280px;height:720px;break-after:page;page-break-after:always}
+ section.slide:last-of-type{break-after:auto;page-break-after:auto}
+ .hud,#notes-panel{display:none!important}
+ @page{size:1280px 720px;margin:0}
+}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Break My Method pitch slides">
+<section class="slide" id="s1" aria-label="Slide 1: Problem">
+ <div class="kicker">Break My Method</div>
+ <h1>Find what got worse<br>before you ship what got better.</h1>
+ <p class="cap problem-copy">AI teams ship prompt and model updates constantly.<br>Standard evals can stay green while important user cases regress.</p>
+ <div class="standard" aria-label="Standard evaluation accuracy">
+  <div><div class="label">Production V1</div><div class="number">100%</div></div>
+  <div><div class="label">Candidate V2</div><div class="number">100%</div></div>
+ </div>
+ <p class="safe">Looks safe to ship.</p>
+ <div class="foot">For AI product &amp; ML engineering teams.</div>
+ <aside class="notes"><h2>0:00–0:45 · Problem</h2><p>AI teams ship prompt and model updates constantly. The standard evaluation can stay green while particular user cases get worse. Here is a support-email extractor: it returns an order ID and the requested action. We shortened its production prompt. Both versions still score one hundred percent on our clean examples. The candidate looks safe to ship. But equal clean accuracy does not tell us whether a removed instruction mattered.</p><p>Our customer is the AI product or ML engineering team making that release decision. Break My Method asks: what should we test before we ship?</p></aside>
+</section>
+<section class="slide" id="s2" aria-label="Slide 2: Product and Nebius">
+ <h2>Break My Method actively decides<br>what to test next.</h2>
+ <div class="product-layout">
+  <ol class="flow" aria-label="Live planning and evidence loop">
+   <li>V1 → V2 change</li>
+   <li><span class="model">GPT-OSS-120B</span><span class="provider">Nebius Token Factory</span></li>
+   <li>Choose next stress test</li>
+   <li>Real evidence<small>Previously executed and frozen</small></li>
+   <li>Next decision<small>Only revealed results go back to the planner</small></li>
+  </ol>
+  <div><p class="principle">The model chooses<br><em>where to look.</em><br>It never invents<br>the evidence.</p><p class="disclosure">Planning is live.<br>Evidence is executed, saved,<br>and scored against ground truth.</p></div>
+ </div>
+ <aside class="notes"><h2>0:45–1:20 · Product + Nebius</h2><p>GPT-OSS-120B on Nebius Token Factory is the live experiment planner. It compares the prompts, sees the remaining test families and budget, and chooses the next test. Then we reveal real, previously executed evidence from the frozen clean audit. Only those revealed scores return to the planner. It never sees scores for unselected families.</p><p>The model chooses where to look. It never invents the evidence. The loop stops at a twenty percentage-point regression or after three families. The task-model evidence came from Qwen/Qwen3-30B-A3B-Instruct-2507; GPT-OSS-120B makes the planning decisions.</p></aside>
+</section>
+<section class="slide" id="s3" aria-label="Slide 3: Live demo">
+ <h1><a href="https://safe-ship-sidekick.lovable.app/" target="_blank" rel="noopener" aria-label="Can we break it? Open the live demo in a new tab">Can we break it?</a></h1>
+ <aside class="notes"><h2>1:20–2:40 · Live demo</h2><p>Click the title or press D to open the live site in a new tab. Show that clean accuracy is one hundred percent for both versions. Click BREAK MY METHOD once. Read the actual live hypothesis and sequence, then open the evidence. If regression is found, point to V1 forty percent, V2 zero percent, and the forty-point drop. State the actual live test count; do not promise one or two tests.</p><p>Return to this deck and advance to Evidence by 2:40. Keep the demo within sixty to ninety seconds. If the service is unavailable or the budget expires, say so and move directly to the separately audited result. Do not present the audit as a live outcome.</p></aside>
+</section>
+<section class="slide" id="s4" aria-label="Slide 4: Audited evidence">
+ <div class="kicker">Audited evidence</div>
+ <div class="evidence-grid">
+  <div>
+   <div class="hero-stat"><b id="run-lengths" style="font-weight:500">2, 2, 1</b> <span>tests</span></div>
+   <p class="metric-label">Nebius planner fresh runs</p>
+   <div class="random"><span id="random-expectation">3.5</span> tests expected<small>Random search · without replacement</small></div>
+   <div class="within"><h3>Within 2 tests</h3><div class="within-row"><div>Nebius: <strong id="within-nebius">3/3</strong></div><div>Random: <strong id="within-random">33.3%</strong></div></div></div>
+  </div>
+  <div class="hidden">
+   <h3>Hidden regression</h3><p class="mode">Instruction-like customer content</p>
+   <table class="result-table" aria-label="Prompt injection accuracy"><tbody><tr><th scope="row">V1</th><td id="v1-score">40%</td></tr><tr class="candidate"><th scope="row">V2</th><td id="v2-score">0%</td></tr></tbody></table>
+   <p class="delta">Δ <span id="delta">−40</span> pp</p>
+  </div>
+ </div>
+ <p class="audit-note">Small synthetic demonstration; n=3 planner runs.</p>
+ <aside class="notes"><h2>2:40–3:40 · Evidence</h2><p>Separate from the live run, we froze both prompts, all examples, the scoring rule and the planner prompt. In three fresh-context runs, Nebius found the hidden regression after two, two and one test families. With one regression family among six, uniform random search without replacement takes three point five tests in expectation. Within two tests, Nebius succeeded in all three audited runs; random search has an exact thirty-three point three percent chance.</p><p>The hidden condition is instruction-like customer content: V1 scores forty percent and V2 zero. V1 is not secure; it still fails three of the five examples. This is a small synthetic demonstration, not statistical significance or evidence of general superiority. Random expectation covers the full six-family search; planner runs have a budget of three.</p><p>Source: clean audit 20260923T105229532804Z/benchmark.json. The benchmark remains separate from live outcomes.</p></aside>
+</section>
+<section class="slide" id="s5" aria-label="Slide 5: Company">
+ <h2>From static eval suites<br>to active AI testing</h2>
+ <dl class="company">
+  <dt>Customer</dt><dd>AI teams shipping prompt/model updates</dd>
+  <dt>Pain</dt><dd>Manual regression-test selection consumes<br>engineering time and inference budget</dd>
+  <dt>Product</dt><dd>Active testing layer on top of existing eval workflows</dd>
+  <dt>Business</dt><dd>Team subscription + evaluation usage<br>+ enterprise private deployment</dd>
+ </dl>
+ <div class="roadmap"><p><strong>Today:</strong> prompt regression testing.</p><p><strong>Next:</strong> models, RAG systems and AI agents.</p></div>
+ <aside class="notes"><h2>3:40–4:30 · Company / 4:30–5:00 · Close + buffer</h2><p>Our target customer is the team shipping prompt and model updates. Today, engineers choose regression tests manually, spending engineering time and inference budget. We want to add active test selection on top of their existing evaluation workflows. The proposed business model is a team subscription plus evaluation usage, with private deployment for enterprise teams. That is the commercial direction, not a claim of existing revenue.</p><p>Today the working product tests a prompt regression. Models, RAG systems and agents are next. Open weights make it possible for teams to pin and privately deploy a planner, and eventually adapt it to their own regression history. These are future directions, not capabilities we have demonstrated today.</p><p><strong>Standard evals tell you what got better. Break My Method finds what got worse before your users do.</strong></p><p>Leave the remaining time for the close, a slow demo or questions. Do not add a sixth slide.</p></aside>
+</section>
+<div class="hud" id="counter" aria-live="polite">1 / 5</div>
+</main>
+<div id="notes-panel" role="dialog" aria-label="Speaker notes" aria-modal="true"></div>
+<script type="application/json" id="audit-data">{
+  "audit_id": "20260923T105229532804Z",
+  "run_lengths": [
+    2,
+    2,
+    1
+  ],
+  "random_expectation": 3.5,
+  "within_two_nebius": "3/3",
+  "within_two_random": "33.3%",
+  "regression": {
+    "test_family": "prompt_injection",
+    "source_condition": "prompt_injection",
+    "v1_correct": 2,
+    "v2_correct": 0,
+    "cases_per_prompt": 5,
+    "v1_accuracy": 0.4,
+    "v2_accuracy": 0.0,
+    "delta_pp": 40,
+    "regression": true
+  },
+  "demo_url": "https://safe-ship-sidekick.lovable.app/"
+}</script>
+<script>
+/* Keyboard/hash/touch stage adapted from SlidesEccomas2026; no runtime dependencies. */
+(()=>{
+ const stage=document.getElementById('stage'), slides=[...document.querySelectorAll('section.slide')], counter=document.getElementById('counter'), notes=document.getElementById('notes-panel');
+ const data=JSON.parse(document.getElementById('audit-data').textContent);
+ document.getElementById('run-lengths').textContent=data.run_lengths.join(', ');
+ document.getElementById('random-expectation').textContent=data.random_expectation;
+ document.getElementById('within-nebius').textContent=data.within_two_nebius;
+ document.getElementById('within-random').textContent=data.within_two_random;
+ document.getElementById('v1-score').textContent=Math.round(data.regression.v1_accuracy*100)+'%';
+ document.getElementById('v2-score').textContent=Math.round(data.regression.v2_accuracy*100)+'%';
+ document.getElementById('delta').textContent='−'+data.regression.delta_pp;
+ let cur=0;
+ function scale(){stage.style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/1280,innerHeight/720)})`;}
+ function updateNotes(){notes.innerHTML=slides[cur].querySelector('.notes').innerHTML+'<p class="hint">N / Escape: close notes · ← / →: navigate · D: demo · F: fullscreen · Ctrl/Cmd+P: PDF</p>';}
+ function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>{s.classList.toggle('active',j===cur);s.setAttribute('aria-hidden',String(j!==cur));});counter.textContent=(cur+1)+' / '+slides.length;const hash='#s'+(cur+1);if(location.hash!==hash)history.replaceState(null,'',hash);updateNotes();}
+ function fromHash(){const m=location.hash.match(/^#s([1-5])$/);show(m?Number(m[1])-1:0);}
+ function demo(){window.open(data.demo_url,'_blank','noopener');}
+ addEventListener('resize',scale);addEventListener('hashchange',fromHash);
+ addEventListener('keydown',e=>{
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();show(cur+1);}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(cur-1);}
+  else if(e.key==='Home')show(0);
+  else if(e.key==='End')show(slides.length-1);
+  else if(e.key.toLowerCase()==='n'){notes.classList.toggle('open');}
+  else if(e.key==='Escape')notes.classList.remove('open');
+  else if(e.key.toLowerCase()==='d')demo();
+  else if(e.key.toLowerCase()==='f'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.().catch(()=>{});}
+ });
+ let tx=null,ty=null;
+ addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+ addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>45&&Math.abs(dx)>1.6*Math.abs(dy))show(cur+(dx<0?1:-1));tx=ty=null;},{passive:true});
+ scale();fromHash();
+})();
+</script>
+</body></html>

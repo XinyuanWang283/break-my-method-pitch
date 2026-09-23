@@ -1,0 +1,23 @@
+{
+  "audit_id": "20260923T105229532804Z",
+  "run_lengths": [
+    2,
+    2,
+    1
+  ],
+  "random_expectation": 3.5,
+  "within_two_nebius": "3/3",
+  "within_two_random": "33.3%",
+  "regression": {
+    "test_family": "prompt_injection",
+    "source_condition": "prompt_injection",
+    "v1_correct": 2,
+    "v2_correct": 0,
+    "cases_per_prompt": 5,
+    "v1_accuracy": 0.4,
+    "v2_accuracy": 0.0,
+    "delta_pp": 40,
+    "regression": true
+  },
+  "demo_url": "https://safe-ship-sidekick.lovable.app/"
+}
